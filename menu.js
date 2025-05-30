@@ -104,9 +104,9 @@ function verificarParOuImpar() { // função que realiza a verificação
     });
 }
 // 3. Calcular média de três notas
-function mediaTresNotas() {
+function mediaTresNotas() { //abre a função para realizar o calculo
     return __awaiter(this, void 0, void 0, function () {
-        var n1, _a, n2, _b, n3, _c, media;
+        var n1, _a, n2, _b, n3, _c, media;  // declara as variaveis, a media receberá o resultado 
         return __generator(this, function (_d) {
             switch (_d.label) {
                 case 0:
@@ -114,21 +114,23 @@ function mediaTresNotas() {
                     _a = Number;
                     return [4 /*yield*/, perguntar('Nota 1: ')];
                 case 1:
-                    n1 = _a.apply(void 0, [_d.sent()]);
+                    n1 = _a.apply(void 0, [_d.sent()]); // _d.sent() obtém o valor retornado pela Promise resolvida,
+                                                     // converte a entrada do usuário para número e armazena em n1
                     _b = Number;
                     return [4 /*yield*/, perguntar('Nota 2: ')];
                 case 2:
-                    n2 = _b.apply(void 0, [_d.sent()]);
-                    _c = Number;
-                    return [4 /*yield*/, perguntar('Nota 3: ')];
+                    n2 = _b.apply(void 0, [_d.sent()]);    // Converte e armazena a segunda nota
+                    _c = Number;     // Prepara a conversão da terceira nota
+                    return [4 /*yield*/, perguntar('Nota 3: ')];   // Solicita a terceira nota e pausa
                 case 3:
-                    n3 = _c.apply(void 0, [_d.sent()]);
-                    media = (n1 + n2 + n3) / 3;
-                    console.log("M\u00E9dia: ".concat(media.toFixed(2)));
+                    n3 = _c.apply(void 0, [_d.sent()]); // Converte e armazena a terceira nota
+                    media = (n1 + n2 + n3) / 3;    // Exibe o resultado formatado com 2 casas decimais
+                    console.log("M\u00E9dia: ".concat(media.toFixed(2))); // toFixed(2) formata o número com 2 casas decimais
+
                     return [4 /*yield*/, pausar()];
                 case 4:
-                    _d.sent();
-                    return [2 /*return*/];
+                    _d.sent(); // Finaliza a pausa
+                    return [2 /*return*/]; //Encerra
             }
         });
     });
