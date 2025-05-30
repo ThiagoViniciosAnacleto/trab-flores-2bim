@@ -136,23 +136,23 @@ function mediaTresNotas() { //abre a função para realizar o calculo
     });
 }
 // 4. Converter Celsius para Fahrenheit
-function celsiusParaFahrenheit() {
+function celsiusParaFahrenheit() {  // função para gerar a conversão 
     return __awaiter(this, void 0, void 0, function () {
-        var celsius, _a, fahrenheit;
-        return __generator(this, function (_b) {
+        var celsius, _a, fahrenheit; //declarando as variáveis com _a para auxiliar na conversão
+        return __generator(this, function (_b) { 
             switch (_b.label) {
                 case 0:
-                    console.log('\nExercício 4: Converter Celsius para Fahrenheit');
-                    _a = Number;
-                    return [4 /*yield*/, perguntar('Temperatura em Celsius: ')];
+                    console.log('\nExercício 4: Converter Celsius para Fahrenheit'); 
+                    _a = Number; // prepara a conversão a variável 
+                    return [4 /*yield*/, perguntar('A temperatura em Celsius é: ')]; // mostra a saída
                 case 1:
-                    celsius = _a.apply(void 0, [_b.sent()]);
-                    fahrenheit = (celsius * 9 / 5) + 32;
+                    celsius = _a.apply(void 0, [_b.sent()]); 
+                    fahrenheit = (celsius * 9 / 5) + 32; // operação padrão para calcular a conversão 
                     console.log("Fahrenheit: ".concat(fahrenheit.toFixed(2)));
-                    return [4 /*yield*/, pausar()];
+                    return [4 /*yield*/, pausar()]; // pausa para mostrar o resultado na saída
                 case 2:
                     _b.sent();
-                    return [2 /*return*/];
+                    return [2 /*return*/]; // encerra a operação
             }
         });
     });
