@@ -14,6 +14,17 @@ async function pausar() {
 }
 
 // 1. Soma de dois números
+
+// 1. Soma de dois números
+
+// 1. Soma de dois números
+
+// 1. Soma de dois números
+
+// 1. Soma de dois números
+
+// 1. Soma de dois números
+
 async function somaDoisNumeros() {
     console.log('\nExercício 1: Soma de dois números');
     const a = Number(await perguntar('Digite o primeiro número: '));
