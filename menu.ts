@@ -42,10 +42,10 @@ async function mediaTresNotas() {
 }
 
 // 4. Converter Celsius para Fahrenheit
-async function celsiusParaFahrenheit() {
+async function celsiusParaFahrenheit(): Promise<void> {
     console.log('\nExercício 4: Converter Celsius para Fahrenheit');
-    const celsius = Number(await perguntar('Temperatura em Celsius: '));
-  const fahrenheit = (celsius * 9 / 5) + 32;
+    const celsius: number = Number(await perguntar('Temperatura em Celsius: '));
+    const fahrenheit: number = (celsius * 9 / 5) + 32;
     console.log(`Fahrenheit: ${fahrenheit.toFixed(2)}`);
     await pausar();
 }
