@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "es2020",                  // Compatível com versões modernas do Node.js
+    "module": "commonjs",                // Módulo padrão para Node.js
+    "outDir": "dist",                    // Pasta de saída para os arquivos compilados
+    "rootDir": ".",                      // Diretório base para os arquivos TypeScript
+    "strict": true,                      // Ativa todas as verificações estritas
+    "esModuleInterop": true,             // Permite importar módulos CommonJS como ES6
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true
+  },
+  "include": ["index.ts"],
+  "exclude": ["node_modules"]
+}
