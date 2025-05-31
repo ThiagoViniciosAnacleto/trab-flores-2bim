@@ -30,6 +30,13 @@ async function verificarParOuImpar() {
     await pausar();
 }
 
+function parOuImpar(num: number): string {
+    return num % 2 == 0? "Par" : "Impar";
+
+}
+
+ console.log(ParOuImpar(7)); //saída impar
+
 // 3. Calcular média de três notas
 async function mediaTresNotas() {
     console.log('\nExercício 3: Calcular média de três notas');
@@ -41,6 +48,12 @@ async function mediaTresNotas() {
     await pausar();
 }
 
+function media(nota1: number, nota2: number, nota3: number): number{
+    return (nota1 + nota2 + nota3) / 3;
+
+console.log(media(7, 8, 9).toFixed(2));
+
+}
 // 4. Converter Celsius para Fahrenheit
 async function celsiusParaFahrenheit(): Promise<void> {
     console.log('\nExercício 4: Converter Celsius para Fahrenheit');
