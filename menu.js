@@ -57,30 +57,24 @@ function pausar() {
     });
 }
 // 1. Soma de dois números
-function somaDoisNumeros() { // Função para realizar a soma
-    return __awaiter(this, void 0, void 0, function () {
-        var a, _a, b, _b; // Declara as variáveis (_a e _b auxilia para a conversão e Number, enquanto a,b armazena a variável)
-        return __generator(this, function (_c) { // __generator vai controlar o fluxo assíncrono (simula async/await)
-            switch (_c.label) {
-                case 0:
-                    console.log('\nExercício 1: Soma de dois números');
-                    _a = Number; // prepara a conversão da primeira var
-                    return [4 /*yield*/, perguntar('Digite o primeiro número: ')]; // o yield aguarda a entrada das variáveis
-                case 1:
-                    a = _a.apply(void 0, [_c.sent()]); // aqui o codigo converte a entrada para número e armazena nessa var
-                    _b = Number; //prepara a conversão da segunda var 
-                    return [4 /*yield*/, perguntar('Digite o segundo número: ')];
-                case 2:
-                    b = _b.apply(void 0, [_c.sent()]);
-                    console.log(`\nO resultado da soma dos dois números é: ${a + b}\n`);  
+async function somaDoisNumeros() {
+    console.log('\nExercício 1: Soma de dois números');
+    
+    // Função auxiliar para validar entrada numérica
+    const lerNumero = async (mensagem: string): Promise<number> => {
+        while (true) {
+            const input = await perguntar(mensagem);
+            const numero = Number(input);
+            if (!isNaN(numero)) return numero;
+            console.log('Por favor, digite um número válido!');
+        }
+    };
 
-                    return [4 /*yield*/, pausar()];
-                case 3:
-                    _c.sent(); //finaliza a pausa 
-                    return [2 /*return*/]; //encerra a função 
-            }
-        });
-    });
+    const a = await lerNumero('Digite o primeiro número: ');
+    const b = await lerNumero('Digite o segundo número: ');
+    
+    console.log(`\n${a} + ${b} = ${a + b}\n`); // Saída formatada
+    await pausar();
 }
 // 2. Verificar par ou ímpar
 function verificarParOuImpar() { // função que realiza a verificação 
@@ -158,9 +152,9 @@ function celsiusParaFahrenheit() {  // função para gerar a conversão
     });
 }
 // 5. Exibir números pares de 1 a 20
-function exibirPares() {
-    return __awaiter(this, void 0, void 0, function () {
-        var pares, i;
+function exibirPares() { // função para exibir os números pares 
+    return __awaiter(this, void 0, void 0, function () { // 
+        var pares, i;  // declarando as variáveis 
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
