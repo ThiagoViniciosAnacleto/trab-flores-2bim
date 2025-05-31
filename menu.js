@@ -94,36 +94,23 @@ async function verificarParOuImpar() {
     await pausar();
 }
 // 3. Calcular média de três notas
-function mediaTresNotas() { //abre a função para realizar o calculo
-    return __awaiter(this, void 0, void 0, function () {
-        var n1, _a, n2, _b, n3, _c, media;  // declara as variaveis, a media receberá o resultado 
-        return __generator(this, function (_d) {
-            switch (_d.label) {
-                case 0:
-                    console.log('\nExercício 3: Calcular média de três notas');
-                    _a = Number;
-                    return [4 /*yield*/, perguntar('Nota 1: ')];
-                case 1:
-                    n1 = _a.apply(void 0, [_d.sent()]); // _d.sent() obtém o valor retornado pela Promise resolvida,
-                                                     // converte a entrada do usuário para número e armazena em n1
-                    _b = Number;
-                    return [4 /*yield*/, perguntar('Nota 2: ')];
-                case 2:
-                    n2 = _b.apply(void 0, [_d.sent()]);    // Converte e armazena a segunda nota
-                    _c = Number;     // Prepara a conversão da terceira nota
-                    return [4 /*yield*/, perguntar('Nota 3: ')];   // Solicita a terceira nota e pausa
-                case 3:
-                    n3 = _c.apply(void 0, [_d.sent()]); // Converte e armazena a terceira nota
-                    media = (n1 + n2 + n3) / 3;    // Exibe o resultado formatado com 2 casas decimais
-                    console.log("M\u00E9dia: ".concat(media.toFixed(2))); // toFixed(2) formata o número com 2 casas decimais
+async function mediaTresNotas() { // Função pra calcular a media
+    console.log('\nExercício 3: Calcular média de três notas');
 
-                    return [4 /*yield*/, pausar()];
-                case 4:
-                    _d.sent(); // Finaliza a pausa
-                    return [2 /*return*/]; //Encerra
-            }
-        });
-    });
+    // Declara, chama e atribui a função
+    const n1 = await lerNumero('Nota 1: ');
+    const n2 = await lerNumero('Nota 2: ');
+    const n3 = await lerNumero('Nota 3: ');
+
+    // Adiciona validação extra para notas entre 0 e 10
+    if ([n1, n2, n3].some(nota => nota < 0 || nota > 10)) {
+        console.log('\nErro: As notas devem estar entre 0 e 10.\n');
+    } else {
+        const media = (n1 + n2 + n3) / 3;
+        console.log(`\nMédia: ${media.toFixed(2)}\n`);
+    }
+
+    await pausar();
 }
 // 4. Converter Celsius para Fahrenheit
 function celsiusParaFahrenheit() {  // função para gerar a conversão 
