@@ -77,25 +77,21 @@ async function somaDoisNumeros() {
     await pausar();
 }
 // 2. Verificar par ou ímpar
-function verificarParOuImpar() { // função que realiza a verificação 
-    return __awaiter(this, void 0, void 0, function () { // __awaiter é uma função gerada pelo TS para lidar com operações assíncronas
-        var n, _a;
-        return __generator(this, function (_b) { // __generator controla o fluxo da função assíncrona
-            switch (_b.label) { // inicia um switch case
-                case 0:
-                    console.log('\nExercício 2: Verificar par ou ímpar'); //mostra na saída
-                    _a = Number; // prepara a função pra conversão que vai acontecer
-                    return [4 /*yield*/, perguntar('Digite um número: ')];
-                case 1:
-                    n = _a.apply(void 0, [_b.sent()]); // converte a entrada que o usuário inseriu para number
-                    console.log(n % 2 === 0 ? "É par" : "É ímpar");
-                    return [4 /*yield*/, pausar()]; // pausa a execução pro usuário visualizar o resultado 
-                case 2:
-                    _b.sent(); // finaliza a pausa
-                    return [2 /*return*/]; // finaliza a execução 
-            }
-        });
-    });
+async function verificarParOuImpar() {
+    console.log('\nExercício 2: Verificar par ou ímpar');
+
+    const lerNumero = async (mensagem: string): Promise<number> => {
+        while (true) {
+            const input = await perguntar(mensagem);
+            const numero = Number(input);
+            if (!isNaN(numero)) return numero;
+            console.log('Valor inválido! Digite apenas números.');
+        }
+    };
+
+    const numero = await lerNumero('Digite um número: ');
+    console.log(`\nO número ${numero} é ${numero % 2 === 0 ? 'PAR' : 'ÍMPAR'}\n`);
+    await pausar();
 }
 // 3. Calcular média de três notas
 function mediaTresNotas() { //abre a função para realizar o calculo
