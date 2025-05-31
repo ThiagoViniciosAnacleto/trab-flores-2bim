@@ -30,6 +30,13 @@ async function verificarParOuImpar() {
     await pausar();
 }
 
+function parOuImpar(num: number): string {
+    return num % 2 == 0? "Par" : "Impar";
+
+}
+
+ console.log(ParOuImpar(7)); //saída impar
+
 // 3. Calcular média de três notas
 async function mediaTresNotas() {
     console.log('\nExercício 3: Calcular média de três notas');
