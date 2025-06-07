@@ -30,7 +30,7 @@ async function verificarParOuImpar() {
     await pausar();
 }
 
-function parOuImpar(num: number): string {
+function ParOuImpar(num: number): string {
     return num % 2 == 0? "Par" : "Impar";
 
 }

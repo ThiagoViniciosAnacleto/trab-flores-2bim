@@ -9,6 +9,6 @@
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true
   },
-  "include": ["index.ts"],
+  "include": ["menu.ts"],
   "exclude": ["node_modules"]
 }
