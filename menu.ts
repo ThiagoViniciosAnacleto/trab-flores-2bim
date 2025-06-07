@@ -1,102 +1,172 @@
-import * as readline from 'readline';
+import * as readline from 'readline'; // Importa o módulo 'readline' do Node.js, usado para interagir com o console (entrada/saída).
 
+// Cria uma interface de leitura de linha.
+// `process.stdin` representa a entrada padrão (teclado).
+// `process.stdout` representa a saída padrão (tela do terminal).
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
 });
 
+/**
+ * @function perguntar
+ * @description
+ * @param {string} pergunta - A string da pergunta a ser exibida no console.
+ * @returns {Promise<string>} Uma Promise que resolve com a resposta do usuário.
+ */
 function perguntar(pergunta: string): Promise<string> {
     return new Promise(resolve => rl.question(pergunta, resolve));
 }
 
+/**
+ * @function pausar
+ * @description Pausa a execução do programa e espera o usuário pressionar Enter.
+ * Útil para manter a saída de um exercício visível até o usuário decidir continuar.*/
 async function pausar() {
+    // `await` garante que a execução da função `pausar` só continue após a Promise de `perguntar` ser resolvida.
     await perguntar('\nPressione Enter para voltar ao menu...');
 }
 
+// --- Funções dos Exercícios ---
+
 // 1. Soma de dois números
+/**
+ * @function somaDoisNumeros
+ * @description Solicita dois números ao usuário, converte as entradas para tipo numérico e exibe a soma formatada.*/
 async function somaDoisNumeros() {
     console.log('\nExercício 1: Soma de dois números');
+    // `await perguntar(...)` espera a entrada do usuário.
+    // `Number(...)` converte a string de entrada para um número.
     const a = Number(await perguntar('Digite o primeiro número: '));
     const b = Number(await perguntar('Digite o segundo número: '));
+    // Usa template literals (crases ``) para facilitar a interpolação de variáveis na string.
     console.log(`Resultado: ${a + b}`);
-    await pausar();
+    await pausar(); // Chama a função para pausar a tela.
 }
 
 // 2. Verificar par ou ímpar
+/**
+ * @function verificarParOuImpar
+ * @description Pede um número ao usuário e determina se ele é par ou ímpar usando o operador de módulo.
+ */
 async function verificarParOuImpar() {
     console.log('\nExercício 2: Verificar par ou ímpar');
     const n = Number(await perguntar('Digite um número: '));
+    // Operador ternário: `condição ? valor_se_verdadeiro : valor_se_falso`
+    // `n % 2 === 0` verifica se o resto da divisão por 2 é zero, indicando um número par.
     console.log(n % 2 === 0 ? "É par" : "É ímpar");
     await pausar();
 }
 
-function ParOuImpar(num: number): string {
-    return num % 2 == 0? "Par" : "Impar";
+/**
+ * @function ParOuImpar
+ * @description Função auxiliar para verificar se um número é par ou ímpar. */
 
+function ParOuImpar(num: number): string {
+    return num % 2 == 0 ? "Par" : "Impar";
 }
 
- console.log(ParOuImpar(7)); //saída impar
+console.log(ParOuImpar(7)); //saída impar
 
 // 3. Calcular média de três notas
+/**
+ * @function mediaTresNotas
+ * @description Solicita três notas e calcula sua média aritmética, exibindo o resultado formatado.
+ */
 async function mediaTresNotas() {
     console.log('\nExercício 3: Calcular média de três notas');
     const n1 = Number(await perguntar('Nota 1: '));
     const n2 = Number(await perguntar('Nota 2: '));
     const n3 = Number(await perguntar('Nota 3: '));
     const media = (n1 + n2 + n3) / 3;
+    // `toFixed(2)` formata o número para ter exatamente duas casas decimais.
     console.log(`Média: ${media.toFixed(2)}`);
     await pausar();
 }
 
-function media(nota1: number, nota2: number, nota3: number): number{
+/**
+ * @function media
+ * @description Função auxiliar pura para calcular a média de três números.*/
+
+function media(nota1: number, nota2: number, nota3: number): number {
     return (nota1 + nota2 + nota3) / 3;
 
-console.log(media(7, 8, 9).toFixed(2));
-
-}
 // 4. Converter Celsius para Fahrenheit
+/**
+ * @function celsiusParaFahrenheit
+ * @description Converte uma temperatura de Celsius para Fahrenheit.
+ * @returns {Promise<void>} Não retorna nenhum valor explicitamente (função assíncrona que executa uma ação).
+ */
 async function celsiusParaFahrenheit(): Promise<void> {
     console.log('\nExercício 4: Converter Celsius para Fahrenheit');
+    // `: number` é uma anotação de tipo TypeScript, garantindo que `celsius` seja um número.
     const celsius: number = Number(await perguntar('Temperatura em Celsius: '));
+    // Fórmula de conversão de Celsius para Fahrenheit.
     const fahrenheit: number = (celsius * 9 / 5) + 32;
     console.log(`Fahrenheit: ${fahrenheit.toFixed(2)}`);
     await pausar();
 }
 
 // 5. Exibir números pares de 1 a 20
+/**
+ * @function exibirPares
+ * @description Percorre os números de 1 a 20, identifica os pares e os exibe.
+ */
 async function exibirPares() {
     console.log('\nExercício 5: Exibir números pares de 1 a 20');
-    let pares = [];
-    for (let i = 1; i <= 20; i++) {
-    if (i % 2 === 0) pares.push(i);
+    let pares = []; // Array para armazenar os números pares encontrados.
+    for (let i = 1; i <= 20; i++) { // Loop que itera de 1 a 20.
+        if (i % 2 === 0) { // Verifica se o número é par (resto da divisão por 2 é zero).
+            pares.push(i); // Adiciona o número par ao array.
+        }
     }
+    // `join(", ")` converte o array `[2, 4, 6, ...]` em uma string "2, 4, 6, ...".
     console.log("Pares de 1 a 20:", pares.join(", "));
     await pausar();
 }
 
 // 6. Ler 5 números e armazenar em array
+/**
+ * @function lerNumerosEmArray
+ * @description Solicita 5 números ao usuário e os armazena em um array, exibindo o array final.
+ */
 async function lerNumerosEmArray() {
     console.log('\nExercício 6: Ler 5 números e armazenar em array');
+    // `: number[]` anota o array como contendo apenas números.
     const numeros: number[] = [];
-    for (let i = 0; i < 5; i++) {
-    const num = Number(await perguntar(`Digite o número ${i + 1}: `));
-    numeros.push(num);
+    for (let i = 0; i < 5; i++) { // Loop para solicitar 5 números.
+        const num = Number(await perguntar(`Digite o número ${i + 1}: `));
+        numeros.push(num); // Adiciona o número lido (e convertido) ao array.
     }
     console.log("Números digitados:", numeros);
     await pausar();
 }
 
 // 7. Encontrar maior número em um array
+/**
+ * @function maiorNumeroArray
+ * @description Pede uma sequência de números separados por espaço, converte-os em um array
+ * e encontra o maior valor usando `Math.max`.
+ */
 async function maiorNumeroArray() {
     console.log('\nExercício 7: Encontrar maior número em um array');
     const numsStr = await perguntar("Digite números separados por espaço: ");
+    // `split(' ')` divide a string em um array de substrings.
+    // `map(Number)` converte cada substring para um número.
     const nums = numsStr.split(' ').map(Number);
+    // Operador spread (`...`): "expande" os elementos do array `nums` como argumentos individuais
+    // para a função `Math.max`, que espera múltiplos argumentos (`Math.max(num1, num2, ...) `).
     const maior = Math.max(...nums);
     console.log(`Maior número: ${maior}`);
     await pausar();
 }
 
 // 8. Contar vogais em uma string
+/**
+ * @function contarVogais
+ * @description Conta o número de vogais (incluindo acentuadas e ignorando maiúsculas/minúsculas)
+ * em uma string fornecida pelo usuário.
+ */
 async function contarVogais() {
     console.log('\nExercício 8: Contar vogais em uma string');
     const texto = await perguntar("Digite uma string: ");
@@ -106,19 +176,36 @@ async function contarVogais() {
 }
 
 // 9. Calculadora simples
+/**
+ * @function calculadoraSimples
+ * @description Implementa uma calculadora básica que realiza adição, subtração,
+ * multiplicação ou divisão com base na operação escolhida pelo usuário.
+ */
 async function calculadoraSimples() {
     console.log('\nExercício 9: Calculadora simples');
     const a = Number(await perguntar("Valor A: "));
     const op = await perguntar("Operação (+ - * /): ");
     const b = Number(await perguntar("Valor B: "));
-    let resultado: number;
+    let resultado: number; // Declara `resultado` sem inicializar, será atribuído no switch.
 
-    switch (op) {
-    case '+': resultado = a + b; break;
-    case '-': resultado = a - b; break;
-    case '*': resultado = a * b; break;
-    case '/': resultado = b !== 0 ? a / b : NaN; break;
-    default: console.log("Operação inválida."); await pausar(); return;
+    switch (op) { // O `switch` é usado para executar diferentes blocos de código com base no valor de `op`.
+        case '+':
+            resultado = a + b;
+            break; // `break` sai do `switch` para evitar a "queda" para o próximo `case`.
+        case '-':
+            resultado = a - b;
+            break;
+        case '*':
+            resultado = a * b;
+            break;
+        case '/':
+            // Trata a divisão por zero: se `b` for 0, o resultado é `NaN` (Not a Number).
+            resultado = b !== 0 ? a / b : NaN;
+            break;
+        default: // Se nenhuma operação válida for correspondida.
+            console.log("Operação inválida.");
+            await pausar();
+            return; // `return` sai da função `calculadoraSimples` completamente.
     }
 
     console.log(`Resultado: ${resultado}`);
@@ -126,125 +213,207 @@ async function calculadoraSimples() {
 }
 
 // 10. Ordenar array em ordem crescente
+/**
+ * @function ordenarArray
+ * @description Pede uma lista de números separados por espaço, os organiza em ordem
+ * crescente e exibe o array ordenado.
+ */
 async function ordenarArray() {
     console.log('\nExercício 10: Ordenar array em ordem crescente');
     const entrada = await perguntar("Digite números separados por espaço: ");
+    // `split(" ")`: Divide a string por espaços.
+    // `map(Number)`: Converte cada parte para número.
+    // `.sort((a, b) => a - b)`: Método `sort` com uma função de comparação para ordenar números em ordem crescente.
+    // Se `a - b` for negativo, `a` vem antes de `b`. Se for positivo, `b` vem antes de `a`.
     const numeros = entrada.split(" ").map(Number).sort((a, b) => a - b);
     console.log("Ordenado:", numeros);
     await pausar();
 }
 
 // 11. Classe Pessoa
+/**
+ * @function classePessoa
+ * @description Demonstra a criação e uso de uma `class` (Pessoa) com propriedades e um método.*/
+
 async function classePessoa() {
     console.log('\nExercício 11: Classe Pessoa');
+    // Definição da classe `Pessoa`.
     class Pessoa {
-        constructor(public nome: string, public idade: number) {}
+        // `public` nos parâmetros do `constructor` é um atalho do TypeScript.
+        // Ele automaticamente cria propriedades `nome` e `idade` na classe
+        // e as inicializa com os valores passados ao construtor.
+        constructor(public nome: string, public idade: number) { }
+
+        // Método da classe `Pessoa`.
         apresentar() {
-        console.log(`Olá, meu nome é ${this.nome} e tenho ${this.idade} anos.`);
+            console.log(`Olá, meu nome é ${this.nome} e tenho ${this.idade} anos.`);
         }
     }
     const nome = await perguntar('Nome: ');
     const idade = Number(await perguntar('Idade: '));
+    // Instanciação (criação de um novo objeto) da classe `Pessoa`.
     const p = new Pessoa(nome, idade);
-    p.apresentar();
+    p.apresentar(); // Chama o método `apresentar` do objeto `p`.
     await pausar();
 }
 
 // 12. Classe Aluno
+/**
+ * @function classeAluno
+ * @description Demonstra uma classe `Aluno` que gerencia o nome e as notas de um aluno,
+ * incluindo um método para calcular sua média.
+ */
 async function classeAluno() {
     console.log('\nExercício 12: Classe Aluno');
     class Aluno {
-        constructor(public nome: string, public notas: number[]) {}
+        // `public` nos parâmetros do construtor para criar e inicializar propriedades `nome` e `notas`.
+        // `notas: number[]` tipa `notas` como um array de números.
+        constructor(public nome: string, public notas: number[]) { }
         media() {
-        const m = this.notas.reduce((a, b) => a + b, 0) / this.notas.length;
-        console.log(`${this.nome} tem média ${m.toFixed(2)}`);
+            // `reduce()`: Método de array que executa uma função `reducer` (a, b => a + b)
+            // em cada elemento, resultando em um único valor (a soma das notas).
+            // `0` é o valor inicial do acumulador `a`.
+            const m = this.notas.reduce((a, b) => a + b, 0) / this.notas.length;
+            console.log(`${this.nome} tem média ${m.toFixed(2)}`);
         }
     }
     const nome = await perguntar('Nome: ');
-    const notas = [];
-    for (let i = 0; i < 3; i++) {
-        notas.push(Number(await perguntar(`Nota ${i+1}: `)));
+    const notas = []; // Inicializa um array vazio para coletar as notas.
+    for (let i = 0; i < 3; i++) { // Loop para solicitar 3 notas.
+        notas.push(Number(await perguntar(`Nota ${i + 1}: `)));
     }
-    const a = new Aluno(nome, notas);
-    a.media();
+    const a = new Aluno(nome, notas); // Cria uma nova instância de Aluno.
+    a.media(); // Chama o método `media` para exibir a média.
     await pausar();
 }
 
 // 13. Classe Carro
+/**
+ * @function classeCarro
+ * @description Demonstra uma classe `Carro` para representar um veículo, com propriedades
+ * como modelo e ano, e um método para exibir seus detalhes.
+ */
 async function classeCarro() {
     console.log('\nExercício 13: Classe Carro');
     class Carro {
-    constructor(public modelo: string, public ano: number) {}
-    exibir() {
-        console.log(`Carro: ${this.modelo}, Ano: ${this.ano}`);
+        constructor(public modelo: string, public ano: number) { }
+        exibir() {
+            console.log(`Carro: ${this.modelo}, Ano: ${this.ano}`);
         }
     }
     const modelo = await perguntar('Modelo: ');
     const ano = Number(await perguntar('Ano: '));
-    const c = new Carro(modelo, ano);
-    c.exibir();
+    const c = new Carro(modelo, ano); // Cria uma nova instância de Carro.
+    c.exibir(); // Chama o método `exibir`.
     await pausar();
 }
 
 // 14. Tabuada
+/**
+ * @function tabuada
+ * @description Calcula e exibe a tabuada de um número de 1 a 10.
+ */
 async function tabuada() {
     console.log('\nExercício 14: Tabuada');
     const n = Number(await perguntar("Digite um número: "));
-    for (let i = 1; i <= 10; i++) {
-        console.log(`${n} x ${i} = ${n * i}`);
+    for (let i = 1; i <= 10; i++) { // Loop de 1 a 10 para as multiplicações.
+        console.log(`${n} x ${i} = ${n * i}`); // Exibe cada linha da tabuada.
     }
     await pausar();
 }
 
 // 15. Calculadora de IMC
+/**
+ * @function calcularIMC
+ * @description Calcula o Índice de Massa Corporal (IMC) e fornece uma classificação
+ * com base no peso (kg) e altura (m) do usuário.
+ */
 async function calcularIMC() {
     console.log('\nExercício 15: Calculadora de IMC');
     const peso = Number(await perguntar("Peso (kg): "));
     const altura = Number(await perguntar("Altura (m): "));
+    // Fórmula do IMC: peso / (altura * altura)
     const imc = peso / (altura * altura);
-    let classificacao = "";
-    if (imc < 18.5) classificacao = "Abaixo do peso";
-    else if (imc < 24.9) classificacao = "Peso normal";
-    else if (imc < 29.9) classificacao = "Sobrepeso";
-    else classificacao = "Obesidade";
+    let classificacao = ""; // Variável para armazenar a classificação do IMC.
+
+    // Estrutura condicional `if-else if-else` para determinar a classificação do IMC.
+    if (imc < 18.5) {
+        classificacao = "Abaixo do peso";
+    } else if (imc < 24.9) {
+        classificacao = "Peso normal";
+    } else if (imc < 29.9) {
+        classificacao = "Sobrepeso";
+    } else {
+        classificacao = "Obesidade";
+    }
     console.log(`IMC: ${imc.toFixed(2)} - ${classificacao}`);
     await pausar();
 }
 
 // 16. Validar senha
+/**
+ * @function validarSenha
+ * @description Verifica a "força" de uma senha com base em critérios como comprimento
+ * mínimo e presença de letras maiúsculas e números.
+ */
 async function validarSenha() {
     console.log('\nExercício 16: Validar senha');
     const senha = await perguntar("Digite uma senha: ");
+    // Validação da senha:
+    // `senha.length >= 8`: Pelo menos 8 caracteres.
+    // `/[A-Z]/.test(senha)`: Contém pelo menos uma letra maiúscula (usa RegExp `test`).
+    // `/[0-9]/.test(senha)`: Contém pelo menos um número.
+    // `&&` (AND lógico): Todas as condições devem ser verdadeiras para a senha ser forte.
     const forte = senha.length >= 8 && /[A-Z]/.test(senha) && /[0-9]/.test(senha);
+    // Exibe a mensagem apropriada usando o operador ternário.
     console.log(forte ? "Senha forte!" : "Senha fraca! Use letras maiúsculas, números e pelo menos 8 caracteres.");
     await pausar();
 }
 
 // 17. Jogo de adivinhação
+/**
+ * @function jogoAdivinhacao
+ * @description Um jogo onde o usuário tenta adivinhar um número secreto entre 1 e 100,
+ * recebendo dicas de "Mais!" ou "Menos!".
+ */
 async function jogoAdivinhacao() {
     console.log('\nExercício 17: Jogo de adivinhação');
+    // `Math.random()` gera um número entre 0 (inclusive) e 1 (exclusive).
+    // `* 100` escala para 0 a 99.99...
+    // `Math.floor()` arredonda para baixo para um número inteiro (0 a 99).
+    // `+ 1` ajusta a faixa para 1 a 100.
     const segredo = Math.floor(Math.random() * 100) + 1;
-    let tentativas = 0, acertou = false;
+    let tentativas = 0, acertou = false; // Variáveis para controlar o jogo.
 
-    while (!acertou) {
-        tentativas++;
+    while (!acertou) { // Loop `while` continua enquanto `acertou` for `false`.
+        tentativas++; // Incrementa o contador de tentativas.
         const chute = Number(await perguntar("Adivinhe um número entre 1 e 100: "));
-            if (chute === segredo) {
-        console.log(`Parabéns! Você acertou em ${tentativas} tentativas.`);
-        acertou = true;
-            } else if (chute < segredo) {
+        if (chute === segredo) { // Condição de vitória.
+            console.log(`Parabéns! Você acertou em ${tentativas} tentativas.`);
+            acertou = true; // Define `acertou` como `true` para sair do loop.
+        } else if (chute < segredo) { // Dica se o chute for muito baixo.
             console.log("Mais!");
-            } else {
+        } else { // Dica se o chute for muito alto.
             console.log("Menos!");
-            }
         }
+    }
     await pausar();
 }
 
 // 18. Contar palavras em uma string
+/**
+ * @function contarPalavras
+ * @description Conta o número de palavras em uma frase fornecida pelo usuário.
+ * Lida com espaços extras e múltiplos espaços entre palavras.
+ */
 async function contarPalavras() {
     console.log('\nExercício 18: Contar palavras em uma string');
     const frase = await perguntar("Digite uma frase: ");
+    // `trim()`: Remove espaços em branco do início e do fim da string.
+    // `split(/\s+/)`: Divide a string em um array de "palavras".
+    // `\s+` é uma expressão regular que significa "um ou mais caracteres de espaço em branco" (espaço, tab, etc.).
+    // Isso garante que múltiplos espaços entre palavras sejam tratados como um único delimitador e
+    // que strings vazias não sejam criadas no array se houver espaços extras.
     const palavras = frase.trim().split(/\s+/);
     console.log(`Total de palavras: ${palavras.length}`);
     await pausar();
@@ -252,58 +421,67 @@ async function contarPalavras() {
 
 // ================= MENU PRINCIPAL ===================
 
+/**
+ * @function exibirMenu
+ * @description Função principal que exibe um menu interativo de exercícios.
+ * Permite ao usuário escolher e executar diferentes funcionalidades até decidir sair.
+ */
 async function exibirMenu() {
-    let opcao: string;
+    let opcao: string; // Declara a variável `opcao` com tipo `string`.
 
-    do {
-    console.log("\n=== MENU DE EXERCÍCIOS ===");
-    console.log("1 - Soma de dois números");
-    console.log("2 - Verificar par ou ímpar");
-    console.log("3 - Calcular média de três notas");
-    console.log("4 - Converter Celsius para Fahrenheit");
-    console.log("5 - Exibir números pares de 1 a 20");
-    console.log("6 - Ler 5 números e armazenar em array");
-    console.log("7 - Encontrar maior número em um array");
-    console.log("8 - Contar vogais em uma string");
-    console.log("9 - Calculadora simples");
-    console.log("10 - Ordenar array em ordem crescente");
-    console.log("11 - Classe Pessoa");
-    console.log("12 - Classe Aluno");
-    console.log("13 - Classe Carro");
-    console.log("14 - Tabuada");
-    console.log("15 - Calculadora de IMC");
-    console.log("16 - Validar senha");
-    console.log("17 - Jogo de adivinhação");
-    console.log("18 - Contar palavras em uma string");
-    console.log("0 - Sair");
+    do { // Loop `do-while`: O bloco de código é executado pelo menos uma vez, e depois a condição é verificada.
+        // Exibe o título do menu e todas as opções de exercícios.
+        console.log("\n=== MENU DE EXERCÍCIOS ===");
+        console.log("1 - Soma de dois números");
+        console.log("2 - Verificar par ou ímpar");
+        console.log("3 - Calcular média de três notas");
+        console.log("4 - Converter Celsius para Fahrenheit");
+        console.log("5 - Exibir números pares de 1 a 20");
+        console.log("6 - Ler 5 números e armazenar em array");
+        console.log("7 - Encontrar maior número em um array");
+        console.log("8 - Contar vogais em uma string");
+        console.log("9 - Calculadora simples");
+        console.log("10 - Ordenar array em ordem crescente");
+        console.log("11 - Classe Pessoa");
+        console.log("12 - Classe Aluno");
+        console.log("13 - Classe Carro");
+        console.log("14 - Tabuada");
+        console.log("15 - Calculadora de IMC");
+        console.log("16 - Validar senha");
+        console.log("17 - Jogo de adivinhação");
+        console.log("18 - Contar palavras em uma string");
+        console.log("0 - Sair");
 
-    opcao = await perguntar("Escolha uma opção (0-18): ");
+        opcao = await perguntar("Escolha uma opção (0-18): "); // Solicita a escolha do usuário.
 
-    switch (opcao) {
-        case '1': await somaDoisNumeros(); break;
-        case '2': await verificarParOuImpar(); break;
-        case '3': await mediaTresNotas(); break;
-        case '4': await celsiusParaFahrenheit(); break;
-        case '5': await exibirPares(); break;
-        case '6': await lerNumerosEmArray(); break;
-        case '7': await maiorNumeroArray(); break;
-        case '8': await contarVogais(); break;
-        case '9': await calculadoraSimples(); break;
-        case '10': await ordenarArray(); break;
-        case '11': await classePessoa(); break;
-        case '12': await classeAluno(); break;
-        case '13': await classeCarro(); break;
-        case '14': await tabuada(); break;
-        case '15': await calcularIMC(); break;
-        case '16': await validarSenha(); break;
-        case '17': await jogoAdivinhacao(); break;
-        case '18': await contarPalavras(); break;
-        case '0': console.log("Saindo..."); break;
-        default: console.log("Opção inválida!");
+        switch (opcao) { // Usa `switch` para chamar a função de exercício correspondente.
+            case '1': await somaDoisNumeros(); break;
+            case '2': await verificarParOuImpar(); break;
+            case '3': await mediaTresNotas(); break;
+            case '4': await celsiusParaFahrenheit(); break;
+            case '5': await exibirPares(); break;
+            case '6': await lerNumerosEmArray(); break;
+            case '7': await maiorNumeroArray(); break;
+            case '8': await contarVogais(); break;
+            case '9': await calculadoraSimples(); break;
+            case '10': await ordenarArray(); break;
+            case '11': await classePessoa(); break;
+            case '12': await classeAluno(); break;
+            case '13': await classeCarro(); break;
+            case '14': await tabuada(); break;
+            case '15': await calcularIMC(); break;
+            case '16': await validarSenha(); break;
+            case '17': await jogoAdivinhacao(); break;
+            case '18': await contarPalavras(); break;
+            case '0': console.log("Saindo..."); break; // Mensagem de saída.
+            default: console.log("Opção inválida!"); // Caso a opção não seja reconhecida.
         }
-    } while (opcao !== '0');
+    } while (opcao !== '0'); // O loop continua enquanto a opção não for '0'.
 
-    rl.close();
+    rl.close(); // Fecha a interface `readline`, liberando os recursos do terminal.
 }
 
+// --- Ponto de Entrada do Programa ---
+// Esta linha chama a função `exibirMenu()`, que inicia toda a aplicação.
+// É o primeiro código a ser executado quando o script é iniciado.
 exibirMenu();
