@@ -55,18 +55,18 @@ async function verificarParOuImpar() {
     // Operador ternário: `condição ? valor_se_verdadeiro : valor_se_falso`
     // `n % 2 === 0` verifica se o resto da divisão por 2 é zero, indicando um número par.
     console.log(n % 2 === 0 ? "É par" : "É ímpar");
+    console.log(`Usando função auxiliar: ${ParOuImpar(n)}`); // Movido o teste da função ParOuImpar para cá
     await pausar();
 }
 
 /**
  * @function ParOuImpar
- * @description Função auxiliar para verificar se um número é par ou ímpar. */
-
+ Fac
+ * @description Função auxiliar para verificar se um número é par ou ímpar.
+ */
 function ParOuImpar(num: number): string {
-    return num % 2 == 0 ? "Par" : "Impar";
+    return num % 2 === 0 ? "Par" : "Impar";
 }
-
-console.log(ParOuImpar(7)); //saída impar
 
 // 3. Calcular média de três notas
 /**
@@ -86,10 +86,11 @@ async function mediaTresNotas() {
 
 /**
  * @function media
- * @description Função auxiliar pura para calcular a média de três números.*/
-
+ * @description Função auxiliar pura para calcular a média de três números.
+ */
 function media(nota1: number, nota2: number, nota3: number): number {
     return (nota1 + nota2 + nota3) / 3;
+} // Adicionada a chave de fechamento que estava faltando
 
 // 4. Converter Celsius para Fahrenheit
 /**
@@ -170,7 +171,7 @@ async function maiorNumeroArray() {
 async function contarVogais() {
     console.log('\nExercício 8: Contar vogais em uma string');
     const texto = await perguntar("Digite uma string: ");
-    const vogais = texto.match(/[aeiouáéíóúâêîôûãõ]/gi);
+    const vogais = texto.match(/[iaeouáéíóúâêîôûãõ]/gi);
     console.log(`Quantidade de vogais: ${vogais ? vogais.length : 0}`);
     await pausar();
 }
@@ -234,7 +235,6 @@ async function ordenarArray() {
 /**
  * @function classePessoa
  * @description Demonstra a criação e uso de uma `class` (Pessoa) com propriedades e um método.*/
-
 async function classePessoa() {
     console.log('\nExercício 11: Classe Pessoa');
     // Definição da classe `Pessoa`.
